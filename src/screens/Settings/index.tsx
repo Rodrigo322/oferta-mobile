@@ -13,9 +13,12 @@ import {
 import { Text, TouchableOpacity, View } from "react-native";
 
 import { HeaderReturn } from "../../components/HeaderReturn";
+import { useAuth } from "../../contexts/AuthContext";
 import { styles } from "./styles";
 
 export function Settings() {
+  const { logout } = useAuth();
+
   const { navigate } = useNavigation();
   return (
     <View style={styles.container}>
@@ -95,7 +98,7 @@ export function Settings() {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigate("SignIn")}
+        onPress={() => logout()}
         style={styles.settingContainerOptionsGroup}
       >
         <View style={styles.settingContainerOptionsIcon}>

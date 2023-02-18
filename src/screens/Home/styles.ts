@@ -1,7 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  container: {},
+  container: {
+    width: "100%",
+    height: "100%",
+  },
   scrollHome: {
     width: "100%",
   },
@@ -15,5 +18,9 @@ export const styles = StyleSheet.create({
     marginLeft: 15,
     marginTop: 10,
     marginRight: 15,
+  },
+  scrollCardList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
 });

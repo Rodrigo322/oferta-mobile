@@ -1,12 +1,34 @@
 import { useNavigation } from "@react-navigation/native";
 import { Envelope, LockKey } from "phosphor-react-native";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import {
+  Alert,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import LogoImg from "../../assets/Logo4.png";
+import { useAuth } from "../../contexts/AuthContext";
 import { styles } from "./styles";
 
 export function SignIn() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const { navigate } = useNavigation();
+  const { login } = useAuth();
+
+  function handleSignIn() {
+    try {
+      login(email, senha);
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Algo deu errado! Tente novamente!");
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Image source={LogoImg} />
@@ -17,6 +39,7 @@ export function SignIn() {
             placeholderTextColor="#fff"
             style={styles.input}
             placeholder="Digite seu e-mail"
+            onChangeText={setEmail}
           />
         </View>
 
@@ -26,13 +49,11 @@ export function SignIn() {
             placeholderTextColor="#fff"
             style={styles.input}
             placeholder="Digite sua senha"
+            onChangeText={setSenha}
           />
         </View>
 
-        <TouchableOpacity
-          onPress={() => navigate("TabRoutes")}
-          style={styles.buttonSignIn}
-        >
+        <TouchableOpacity onPress={handleSignIn} style={styles.buttonSignIn}>
           <Text style={styles.buttonSignInText}>Entrar</Text>
         </TouchableOpacity>
       </View>

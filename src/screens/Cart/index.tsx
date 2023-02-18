@@ -39,72 +39,75 @@ export function Cart() {
           </Text>
         </View>
       </View>
-      <View style={styles.cartScrollView}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.cartProduct}>
-            <Image style={styles.cartProductImage} source={Tomate} />
-            <View style={styles.cartProductTextInfo}>
-              <Text style={styles.cartProductText}>Tomate</Text>
-              <Text style={styles.cartProductText}>R$ 8,00</Text>
-            </View>
-
-            <View style={styles.cartProductButtons}>
-              <TouchableOpacity>
-                <PlusCircle color="#019972" size={32} weight="thin" />
-              </TouchableOpacity>
-              <Text style={styles.cartProductButtonsText}>1</Text>
-              <TouchableOpacity>
-                <MinusCircle color="#019972" size={32} weight="thin" />
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity>
-              <XCircle color="#d46b71" size={32} weight="fill" />
-            </TouchableOpacity>
+      {/* <View style={styles.cartScrollView}> */}
+      <ScrollView
+        style={styles.cartScrollView}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.cartProduct}>
+          <Image style={styles.cartProductImage} source={Tomate} />
+          <View style={styles.cartProductTextInfo}>
+            <Text style={styles.cartProductText}>Tomate</Text>
+            <Text style={styles.cartProductText}>R$ 8,00</Text>
           </View>
 
-          <View style={styles.cartProduct}>
-            <Image style={styles.cartProductImage} source={Tomate} />
-            <View style={styles.cartProductTextInfo}>
-              <Text style={styles.cartProductText}>Tomate</Text>
-              <Text style={styles.cartProductText}>R$ 8,00</Text>
-            </View>
-
-            <View style={styles.cartProductButtons}>
-              <TouchableOpacity>
-                <PlusCircle color="#019972" size={32} weight="thin" />
-              </TouchableOpacity>
-              <Text style={styles.cartProductButtonsText}>1</Text>
-              <TouchableOpacity>
-                <MinusCircle color="#019972" size={32} weight="thin" />
-              </TouchableOpacity>
-            </View>
+          <View style={styles.cartProductButtons}>
             <TouchableOpacity>
-              <XCircle color="#d46b71" size={32} weight="fill" />
+              <PlusCircle color="#019972" size={32} weight="thin" />
+            </TouchableOpacity>
+            <Text style={styles.cartProductButtonsText}>1</Text>
+            <TouchableOpacity>
+              <MinusCircle color="#019972" size={32} weight="thin" />
             </TouchableOpacity>
           </View>
+          <TouchableOpacity>
+            <XCircle color="#d46b71" size={32} weight="fill" />
+          </TouchableOpacity>
+        </View>
 
-          <View style={styles.cartProduct}>
-            <Image style={styles.cartProductImage} source={Tomate} />
-            <View style={styles.cartProductTextInfo}>
-              <Text style={styles.cartProductText}>Tomate</Text>
-              <Text style={styles.cartProductText}>R$ 8,00</Text>
-            </View>
+        <View style={styles.cartProduct}>
+          <Image style={styles.cartProductImage} source={Tomate} />
+          <View style={styles.cartProductTextInfo}>
+            <Text style={styles.cartProductText}>Tomate</Text>
+            <Text style={styles.cartProductText}>R$ 8,00</Text>
+          </View>
 
-            <View style={styles.cartProductButtons}>
-              <TouchableOpacity>
-                <PlusCircle color="#019972" size={32} weight="thin" />
-              </TouchableOpacity>
-              <Text style={styles.cartProductButtonsText}>1</Text>
-              <TouchableOpacity>
-                <MinusCircle color="#019972" size={32} weight="thin" />
-              </TouchableOpacity>
-            </View>
+          <View style={styles.cartProductButtons}>
             <TouchableOpacity>
-              <XCircle color="#d46b71" size={32} weight="fill" />
+              <PlusCircle color="#019972" size={32} weight="thin" />
+            </TouchableOpacity>
+            <Text style={styles.cartProductButtonsText}>1</Text>
+            <TouchableOpacity>
+              <MinusCircle color="#019972" size={32} weight="thin" />
             </TouchableOpacity>
           </View>
-        </ScrollView>
-      </View>
+          <TouchableOpacity>
+            <XCircle color="#d46b71" size={32} weight="fill" />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.cartProduct}>
+          <Image style={styles.cartProductImage} source={Tomate} />
+          <View style={styles.cartProductTextInfo}>
+            <Text style={styles.cartProductText}>Tomate</Text>
+            <Text style={styles.cartProductText}>R$ 8,00</Text>
+          </View>
+
+          <View style={styles.cartProductButtons}>
+            <TouchableOpacity>
+              <PlusCircle color="#019972" size={32} weight="thin" />
+            </TouchableOpacity>
+            <Text style={styles.cartProductButtonsText}>1</Text>
+            <TouchableOpacity>
+              <MinusCircle color="#019972" size={32} weight="thin" />
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity>
+            <XCircle color="#d46b71" size={32} weight="fill" />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+      {/* </View> */}
 
       <View style={styles.cartContainerFooterButtons}>
         <TouchableOpacity style={styles.cartFooterButton}>
