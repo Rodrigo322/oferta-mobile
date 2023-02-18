@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { PlusCircle } from "phosphor-react-native";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
@@ -5,8 +6,9 @@ import Tomate from "../../assets/Tomate.png";
 import { styles } from "./styles";
 
 export function Card() {
+  const { navigate } = useNavigation();
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => navigate("DetailsProduct")}>
       <View style={styles.cardContainer}>
         <View style={styles.cardImageView}>
           <Image style={styles.cardImage} source={Tomate} />

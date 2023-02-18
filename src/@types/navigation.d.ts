@@ -4,6 +4,12 @@ export declare global {
       SignIn: undefined;
       SignUp: undefined;
       TabRoutes: undefined;
+      Profile: undefined;
+      ResetPassword: undefined;
+      DeactivateAccount: undefined;
+      AddressProfile: undefined;
+      DetailsProduct: undefined;
+      BuyFinalized: undefined;
     }
   }
 }

@@ -13,13 +13,17 @@ export const styles = StyleSheet.create({
     padding: 40,
   },
   input: {
-    backgroundColor: "#53bda2",
     width: "100%",
     height: 60,
-    borderRadius: 7,
+    paddingLeft: 10,
+  },
+  inputGroup: {
+    flexDirection: "row",
+    paddingHorizontal: 10,
+    backgroundColor: "#53bda2",
     marginBottom: 15,
+    borderRadius: 7,
     alignItems: "center",
-    paddingLeft: 20,
   },
   buttonSignIn: {
     height: 60,
