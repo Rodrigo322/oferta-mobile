@@ -1,8 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
 import { WhatsappLogo } from "phosphor-react-native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { HeaderReturn } from "../../components/HeaderReturn";
 
 export function BuyFinalized() {
+  const { navigate } = useNavigation();
   return (
     <View>
       <HeaderReturn title="Início" />
@@ -20,7 +22,10 @@ export function BuyFinalized() {
         </Text>
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerButton}>
+        <TouchableOpacity
+          onPress={() => navigate("Home")}
+          style={styles.footerButton}
+        >
           <Text style={styles.footerText}>Finalizar compra</Text>
         </TouchableOpacity>
       </View>

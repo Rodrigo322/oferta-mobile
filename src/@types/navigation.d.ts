@@ -1,7 +1,6 @@
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
-      AppRoutes: undefined;
       SignIn: undefined;
       SignUp: undefined;
       TabRoutes: undefined;
@@ -11,6 +10,9 @@ export declare global {
       AddressProfile: undefined;
       DetailsProduct: { id: number };
       BuyFinalized: undefined;
+      Cart: undefined;
+      SelectBank: undefined;
+      Home: undefined;
     }
   }
 }

@@ -1,26 +1,32 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
+  Bag,
   BellRinging,
   House,
   ShoppingCart,
   UserGear,
 } from "phosphor-react-native";
+import { useTabContext } from "../contexts/TabContext";
 import { BuyFinalized } from "../screens/ BuyFinalized";
 import { AddressProfile } from "../screens/AddressProfile";
 import { Cart } from "../screens/Cart";
 import { DeactivateAccount } from "../screens/DeactivateAccount";
 import { DetailsProduct } from "../screens/DetailsProduct";
 import { Home } from "../screens/Home";
+import { MyRequests } from "../screens/MyRequests";
 import { Notifications } from "../screens/Notifications";
 import { Profile } from "../screens/Profile";
 import { ResetPassword } from "../screens/ResetPassword";
+import { SelectBank } from "../screens/SelectBank";
 import { Settings } from "../screens/Settings";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export function TabRoutes() {
+  const { showTab } = useTabContext();
   return (
     <Navigator
+      initialRouteName="SelectBank"
       screenOptions={{
         headerStyle: {
           backgroundColor: "#019972",
@@ -42,29 +48,54 @@ export function TabRoutes() {
       <Screen
         name="Home"
         component={Home}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <House color={color} size={30} weight="fill" />
-          ),
-        }}
+        options={
+          showTab
+            ? {
+                tabBarIcon: ({ color }) => (
+                  <House color={color} size={30} weight="fill" />
+                ),
+              }
+            : { tabBarButton: () => null }
+        }
       />
       <Screen
         name="Cart"
         component={Cart}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <ShoppingCart color={color} size={30} weight="fill" />
-          ),
-        }}
+        options={
+          showTab
+            ? {
+                tabBarIcon: ({ color }) => (
+                  <ShoppingCart color={color} size={30} weight="fill" />
+                ),
+              }
+            : { tabBarButton: () => null }
+        }
+      />
+      <Screen
+        name="MyRequests"
+        component={MyRequests}
+        options={
+          showTab
+            ? {
+                tabBarIcon: ({ color }) => (
+                  <Bag color={color} size={30} weight="fill" />
+                ),
+              }
+            : { tabBarButton: () => null }
+        }
       />
       <Screen
         name="Notifications"
         component={Notifications}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <BellRinging color={color} size={30} weight="fill" />
-          ),
-        }}
+        options={
+          showTab
+            ? {
+                tabBarIcon: ({ color }) => (
+                  <BellRinging color={color} size={30} weight="fill" />
+                ),
+              }
+            : { tabBarButton: () => null }
+        }
       />
       <Screen
         name="Settings"
@@ -104,6 +135,12 @@ export function TabRoutes() {
       <Screen
         name="BuyFinalized"
         component={BuyFinalized}
+        options={{ tabBarButton: () => null }}
+      />
+
+      <Screen
+        name="SelectBank"
+        component={SelectBank}
         options={{ tabBarButton: () => null }}
       />
     </Navigator>

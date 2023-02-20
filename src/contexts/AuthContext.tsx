@@ -45,13 +45,15 @@ export function AuthProvider({ children }: any) {
       if (isTokenValid(storageToken)) {
         setToken({ token: storageToken });
         api.defaults.headers.common["Authorization"] = `Bearer ${storageToken}`;
+      } else {
+        await logout();
       }
     };
 
     loadStoredData();
   }, [token]);
 
-  const login = async (email: string, senha: string) => {
+  async function login(email: string, senha: string) {
     try {
       const response = await api.post("/login", {
         email,
@@ -64,7 +66,7 @@ export function AuthProvider({ children }: any) {
 
       const { token } = response.data;
 
-      setToken({ token });
+      setToken(token);
 
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
@@ -76,16 +78,17 @@ export function AuthProvider({ children }: any) {
         "Não foi possível realizar o login. Verifique suas credenciais e tente novamente."
       );
     }
-  };
+  }
 
-  const logout = async () => {
+  async function logout() {
     setToken(null);
 
     delete api.defaults.headers.common["Authorization"];
 
     await AsyncStorage.removeItem("@storage:token");
     await AsyncStorage.clear();
-  };
+    console.log("Token de saida " + token);
+  }
 
   const authContextValue: AuthContextType = {
     token,

@@ -1,19 +1,35 @@
 import { useEffect, useState } from "react";
-import { FlatList, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
 
-import { Card, CardProps } from "../../components/CardProduct";
 import { Header } from "../../components/Header";
 import { Highlights } from "../../components/Highlights";
 import { api } from "../../services/api";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Card, CardProps } from "../../components/CardProduct";
 import { styles } from "./styles";
 
+// interface RouteParams {
+//   id: number;
+//   name: string;
+// }
+
 export function Home() {
-  const [products, setProduct] = useState<CardProps[]>([]);
+  const [products, setProducts] = useState<CardProps[]>([]);
+  const [idBank, setIdBank] = useState<string | null>();
+  // const route = useRoute();
+
+  // const { id } = route.params as RouteParams;
+  async function getProduct() {
+    const id = await AsyncStorage.getItem("@storage:idBank");
+    console.log("id da banca " + id);
+    setIdBank(id);
+  }
+  getProduct();
 
   useEffect(() => {
-    api.get<CardProps[]>("/produtos").then((response) => {
-      setProduct(response.data);
+    api.get<CardProps[]>(`produtos/${idBank}`).then((response) => {
+      setProducts(response.data);
     });
   }, []);
 
@@ -27,27 +43,17 @@ export function Home() {
       >
         <SafeAreaView style={{ flex: 1, paddingTop: 20 }}>
           <Highlights />
-          <Text style={styles.infoHomeText}>Frutas, Verduras e Legumes</Text>
+          <Text style={styles.infoHomeText}>Frutas, Verduras</Text>
           <View style={styles.listHomeProduct}>
-            <ScrollView style={styles.scrollCardList}>
-              <FlatList
-                columnWrapperStyle={{ justifyContent: "space-between" }}
-                numColumns={2}
-                contentContainerStyle={{
-                  marginTop: 10,
-                  paddingBottom: 50,
-                }}
-                data={products}
-                renderItem={({ item }) => (
-                  <Card
-                    id={item.id}
-                    img={item.img}
-                    preco={item.preco}
-                    nome={item.nome}
-                  />
-                )}
+            {products.map((product) => (
+              <Card
+                key={product.id}
+                img={product.img}
+                nome={product.nome}
+                id={product.id}
+                preco={product.preco}
               />
-            </ScrollView>
+            ))}
           </View>
         </SafeAreaView>
       </ScrollView>

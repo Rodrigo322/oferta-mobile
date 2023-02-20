@@ -1,28 +1,68 @@
 import { useNavigation } from "@react-navigation/native";
 import {
   MapPin,
-  MinusCircle,
   PlusCircle,
   ShoppingBag,
   WhatsappLogo,
   XCircle,
 } from "phosphor-react-native";
-import { Image, ScrollView, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { useContext } from "react";
+import {
+  Alert,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { HeaderReturn } from "../../components/HeaderReturn";
-
-import Tomate from "../../assets/Tomate.png";
+import { CartContext } from "../../contexts/CartContext";
+import { api } from "../../services/api";
 import { styles } from "./styles";
 
+interface vendaProps {
+  id: number;
+  quantidade: number;
+}
+
 export function Cart() {
-  const { navigate } = useNavigation();
+  const { navigate, goBack } = useNavigation();
+  const { cart, removeFromCart } = useContext(CartContext);
+
+  let venda: vendaProps[] = [];
+
+  venda = cart.products.map((product) => {
+    return {
+      id: product.id,
+      quantidade: product.quantity,
+    };
+  });
+
+  const requestBody = {
+    produtos: JSON.stringify(venda),
+  };
+
+  console.log(requestBody);
+
+  async function handleVandaProdutos() {
+    api
+      .post("/venda", {
+        produtos: venda,
+        usuarioVendedorId: cart.products[0].userId,
+      })
+      .then((response) => {
+        Alert.alert(response.data.message);
+        navigate("BuyFinalized");
+      });
+  }
+
   return (
     <View>
       <HeaderReturn title="Carrinho de compras" />
       <View style={styles.cartHeader}>
         <Text style={[styles.cartHeaderText, styles.cartHeaderTextFirst]}>
-          1 Item
+          {cart.products.length} Item
         </Text>
         <View style={[styles.cartHeaderValueTotal]}>
           <Text style={styles.cartHeaderText}>Valor total:</Text>
@@ -39,84 +79,43 @@ export function Cart() {
           </Text>
         </View>
       </View>
-      {/* <View style={styles.cartScrollView}> */}
       <ScrollView
         style={styles.cartScrollView}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.cartProduct}>
-          <Image style={styles.cartProductImage} source={Tomate} />
-          <View style={styles.cartProductTextInfo}>
-            <Text style={styles.cartProductText}>Tomate</Text>
-            <Text style={styles.cartProductText}>R$ 8,00</Text>
-          </View>
+        {cart.products.map((product) => (
+          <View key={product.id} style={styles.cartProduct}>
+            <Image
+              style={styles.cartProductImage}
+              source={{ uri: product.img }}
+            />
+            <View style={styles.cartProductTextInfo}>
+              <Text style={styles.cartProductText}>{product.name}</Text>
+              <Text style={styles.cartProductText}>R$ {product.price}</Text>
+            </View>
 
-          <View style={styles.cartProductButtons}>
-            <TouchableOpacity>
-              <PlusCircle color="#019972" size={32} weight="thin" />
-            </TouchableOpacity>
-            <Text style={styles.cartProductButtonsText}>1</Text>
-            <TouchableOpacity>
-              <MinusCircle color="#019972" size={32} weight="thin" />
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity>
-            <XCircle color="#d46b71" size={32} weight="fill" />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.cartProduct}>
-          <Image style={styles.cartProductImage} source={Tomate} />
-          <View style={styles.cartProductTextInfo}>
-            <Text style={styles.cartProductText}>Tomate</Text>
-            <Text style={styles.cartProductText}>R$ 8,00</Text>
-          </View>
-
-          <View style={styles.cartProductButtons}>
-            <TouchableOpacity>
-              <PlusCircle color="#019972" size={32} weight="thin" />
-            </TouchableOpacity>
-            <Text style={styles.cartProductButtonsText}>1</Text>
-            <TouchableOpacity>
-              <MinusCircle color="#019972" size={32} weight="thin" />
+            <View style={styles.cartProductButtons}>
+              <Text style={styles.cartProductButtonsText}>
+                Quantidade {product.quantity}
+              </Text>
+            </View>
+            <TouchableOpacity onPress={() => removeFromCart(product.id)}>
+              <XCircle color="#d46b71" size={32} weight="fill" />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity>
-            <XCircle color="#d46b71" size={32} weight="fill" />
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.cartProduct}>
-          <Image style={styles.cartProductImage} source={Tomate} />
-          <View style={styles.cartProductTextInfo}>
-            <Text style={styles.cartProductText}>Tomate</Text>
-            <Text style={styles.cartProductText}>R$ 8,00</Text>
-          </View>
-
-          <View style={styles.cartProductButtons}>
-            <TouchableOpacity>
-              <PlusCircle color="#019972" size={32} weight="thin" />
-            </TouchableOpacity>
-            <Text style={styles.cartProductButtonsText}>1</Text>
-            <TouchableOpacity>
-              <MinusCircle color="#019972" size={32} weight="thin" />
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity>
-            <XCircle color="#d46b71" size={32} weight="fill" />
-          </TouchableOpacity>
-        </View>
+        ))}
       </ScrollView>
-      {/* </View> */}
-
       <View style={styles.cartContainerFooterButtons}>
-        <TouchableOpacity style={styles.cartFooterButton}>
+        <TouchableOpacity
+          onPress={() => goBack()}
+          style={styles.cartFooterButton}
+        >
           <PlusCircle color="#fff" size={32} weight="duotone" />
           <Text style={styles.cartFooterButtonText}>Produtos</Text>
         </TouchableOpacity>
         <WhatsappLogo color="#019972" size={60} weight="duotone" />
         <TouchableOpacity
-          onPress={() => navigate("BuyFinalized")}
+          onPress={handleVandaProdutos}
           style={styles.cartFooterButton}
         >
           <ShoppingBag color="#FFF" size={32} weight="duotone" />

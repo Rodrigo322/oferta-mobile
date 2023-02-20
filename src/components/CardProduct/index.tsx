@@ -16,7 +16,7 @@ export function Card({ id, nome, preco, img }: CardProps) {
   return (
     <TouchableOpacity
       style={styles.cardContainer}
-      onPress={() => navigate("DetailsProduct", { id })}
+      onPress={() => navigate("DetailsProduct", { id: id })}
     >
       <View style={styles.cardImageView}>
         <Image style={styles.cardImage} source={{ uri: img }} />
