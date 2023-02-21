@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: 60,
     paddingLeft: 10,
+    color: "#fff",
   },
   inputGroup: {
     flexDirection: "row",
