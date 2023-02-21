@@ -7,14 +7,7 @@ import {
   XCircle,
 } from "phosphor-react-native";
 import { useContext } from "react";
-import {
-  Alert,
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { HeaderReturn } from "../../components/HeaderReturn";
 import { CartContext } from "../../contexts/CartContext";
@@ -43,7 +36,7 @@ export function Cart() {
     produtos: JSON.stringify(venda),
   };
 
-  console.log(requestBody);
+  console.log(cart.products);
 
   async function handleVandaProdutos() {
     api
@@ -52,7 +45,6 @@ export function Cart() {
         usuarioVendedorId: cart.products[0].userId,
       })
       .then((response) => {
-        Alert.alert(response.data.message);
         navigate("BuyFinalized");
       });
   }

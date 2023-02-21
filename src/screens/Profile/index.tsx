@@ -1,15 +1,17 @@
+import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { HeaderReturn } from "../../components/HeaderReturn";
 import { styles } from "./styles";
 
 export function Profile() {
+  const [isUpdated, setIsUpdated] = useState(false);
   return (
     <View>
       <HeaderReturn title="Dados Pessoais" />
       <View style={styles.header}>
         <View />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setIsUpdated(!isUpdated)}>
           <Text style={styles.headerButtonText}>Alterar</Text>
         </TouchableOpacity>
       </View>
@@ -17,7 +19,7 @@ export function Profile() {
         <View style={styles.textGroup}>
           <Text style={styles.text}>E-mail</Text>
           <TextInput
-            editable={false}
+            editable={isUpdated}
             style={styles.input}
             value="Rodrigo@gmail.com"
           />
@@ -26,7 +28,7 @@ export function Profile() {
         <View style={styles.textGroup}>
           <Text style={styles.text}>Nome</Text>
           <TextInput
-            editable={false}
+            editable={isUpdated}
             style={styles.input}
             value="Rodrigo Lucas"
           />
@@ -35,7 +37,7 @@ export function Profile() {
         <View style={styles.textGroup}>
           <Text style={styles.text}>CPF</Text>
           <TextInput
-            editable={false}
+            editable={isUpdated}
             style={styles.input}
             value="000.000.000-00"
           />

@@ -3,6 +3,7 @@ import {
   Bag,
   BellRinging,
   House,
+  ShoppingBagOpen,
   ShoppingCart,
   UserGear,
 } from "phosphor-react-native";
@@ -26,7 +27,7 @@ export function TabRoutes() {
   const { showTab } = useTabContext();
   return (
     <Navigator
-      initialRouteName="SelectBank"
+      initialRouteName="Home"
       screenOptions={{
         headerStyle: {
           backgroundColor: "#019972",
@@ -98,6 +99,19 @@ export function TabRoutes() {
         }
       />
       <Screen
+        name="SelectBank"
+        component={SelectBank}
+        options={
+          showTab === false
+            ? {
+                tabBarIcon: ({ color }) => (
+                  <ShoppingBagOpen color={color} size={30} weight="fill" />
+                ),
+              }
+            : { tabBarButton: () => null }
+        }
+      />
+      <Screen
         name="Settings"
         component={Settings}
         options={{
@@ -106,6 +120,7 @@ export function TabRoutes() {
           ),
         }}
       />
+
       <Screen
         name="Profile"
         component={Profile}
@@ -135,12 +150,6 @@ export function TabRoutes() {
       <Screen
         name="BuyFinalized"
         component={BuyFinalized}
-        options={{ tabBarButton: () => null }}
-      />
-
-      <Screen
-        name="SelectBank"
-        component={SelectBank}
         options={{ tabBarButton: () => null }}
       />
     </Navigator>

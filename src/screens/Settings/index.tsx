@@ -10,16 +10,28 @@ import {
   SignOut,
   XSquare,
 } from "phosphor-react-native";
+import { useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
 import { HeaderReturn } from "../../components/HeaderReturn";
 import { useAuth } from "../../contexts/AuthContext";
+import { CartContext } from "../../contexts/CartContext";
+import { useTabContext } from "../../contexts/TabContext";
 import { styles } from "./styles";
 
 export function Settings() {
   const { logout } = useAuth();
-
+  const { setShowTab, setIdBank } = useTabContext();
+  const { removeAllFromCart } = useContext(CartContext);
   const { navigate } = useNavigation();
+
+  function handleSignOut() {
+    logout();
+    setShowTab(false);
+    setIdBank(0);
+    removeAllFromCart();
+  }
+
   return (
     <View style={styles.container}>
       <HeaderReturn title="Configurações" />
@@ -98,7 +110,7 @@ export function Settings() {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => logout()}
+        onPress={handleSignOut}
         style={styles.settingContainerOptionsGroup}
       >
         <View style={styles.settingContainerOptionsIcon}>

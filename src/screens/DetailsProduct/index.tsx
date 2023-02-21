@@ -3,7 +3,7 @@ import { MinusCircle, PlusCircle } from "phosphor-react-native";
 import { useContext, useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-import LogoImg from "../../assets/Happy_Farm.png";
+import LogoImg from "../../assets/Logo4.png";
 import { HeaderReturn } from "../../components/HeaderReturn";
 import { CartContext } from "../../contexts/CartContext";
 import { api } from "../../services/api";

@@ -1,10 +1,42 @@
 import { useNavigation } from "@react-navigation/native";
 import { WhatsappLogo } from "phosphor-react-native";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useContext } from "react";
+import {
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { HeaderReturn } from "../../components/HeaderReturn";
+import { CartContext } from "../../contexts/CartContext";
 
 export function BuyFinalized() {
   const { navigate } = useNavigation();
+  const { cart, removeAllFromCart } = useContext(CartContext);
+
+  let produtos = [];
+
+  produtos = cart.products.map((product) => {
+    return {
+      id: JSON.stringify(product.id),
+      nome: JSON.stringify(product.name),
+      preço: JSON.stringify(product.price),
+      quantidade: JSON.stringify(product.quantity),
+    };
+  });
+
+  const requestBody = {
+    produtos: JSON.stringify(produtos),
+  };
+  function handleLinkToWhatsapp() {
+    Linking.openURL(
+      `whatsapp://send?text=Olá! Desejo comprar esses produtos!
+        ${requestBody.produtos}
+      &phone=+5562998256593`
+    );
+    removeAllFromCart();
+  }
   return (
     <View>
       <HeaderReturn title="Início" />
@@ -23,7 +55,7 @@ export function BuyFinalized() {
       </View>
       <View style={styles.footer}>
         <TouchableOpacity
-          onPress={() => navigate("Home")}
+          onPress={handleLinkToWhatsapp}
           style={styles.footerButton}
         >
           <Text style={styles.footerText}>Finalizar compra</Text>

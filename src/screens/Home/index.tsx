@@ -1,37 +1,41 @@
+import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { Header } from "../../components/Header";
 import { Highlights } from "../../components/Highlights";
 import { api } from "../../services/api";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Card, CardProps } from "../../components/CardProduct";
+import { useTabContext } from "../../contexts/TabContext";
 import { styles } from "./styles";
-
-// interface RouteParams {
-//   id: number;
-//   name: string;
-// }
 
 export function Home() {
   const [products, setProducts] = useState<CardProps[]>([]);
-  const [idBank, setIdBank] = useState<string | null>();
-  // const route = useRoute();
+  const { idBank, setShowTab } = useTabContext();
 
-  // const { id } = route.params as RouteParams;
-  async function getProduct() {
-    const id = await AsyncStorage.getItem("@storage:idBank");
-    console.log("id da banca " + id);
-    setIdBank(id);
-  }
-  getProduct();
+  const { navigate } = useNavigation();
 
   useEffect(() => {
-    api.get<CardProps[]>(`produtos/${idBank}`).then((response) => {
-      setProducts(response.data);
-    });
-  }, []);
+    if (idBank === 0) {
+      return;
+    } else {
+      api.get<CardProps[]>(`produtos/${idBank}`).then((response) => {
+        setProducts(response.data);
+      });
+    }
+  }, [idBank]);
+
+  function handleSelectBank() {
+    setShowTab(false);
+    navigate("SelectBank");
+  }
 
   return (
     <View style={styles.container}>
@@ -43,7 +47,12 @@ export function Home() {
       >
         <SafeAreaView style={{ flex: 1, paddingTop: 20 }}>
           <Highlights />
-          <Text style={styles.infoHomeText}>Frutas, Verduras</Text>
+          <View style={styles.Header}>
+            <Text style={styles.infoHomeText}>Frutas, Verduras</Text>
+            <TouchableOpacity onPress={handleSelectBank}>
+              <Text style={styles.HeaderText}>Selecionar banca</Text>
+            </TouchableOpacity>
+          </View>
           <View style={styles.listHomeProduct}>
             {products.map((product) => (
               <Card

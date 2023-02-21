@@ -9,6 +9,15 @@ export const styles = StyleSheet.create({
   scrollHome: {
     width: "100%",
   },
+  Header: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  HeaderText: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#019972",
+  },
   infoHomeText: {
     fontSize: 16,
     fontWeight: "700",

@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Dimensions,
   Image,
@@ -12,9 +12,9 @@ const { width } = Dimensions.get("window");
 
 import { api } from "../../services/api";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import logoImg from "../../assets/Logo4.png";
 import { HeaderReturn } from "../../components/HeaderReturn";
+import { CartContext } from "../../contexts/CartContext";
 import { useTabContext } from "../../contexts/TabContext";
 
 interface BankingResponse {
@@ -24,20 +24,23 @@ interface BankingResponse {
 
 export function SelectBank() {
   const [banking, setBanking] = useState<BankingResponse[]>([]);
-  const { setShowTab } = useTabContext();
+  const { setShowTab, setIdBank } = useTabContext();
+  const { removeAllFromCart } = useContext(CartContext);
 
   const { navigate } = useNavigation();
 
   useEffect(() => {
     api.get<BankingResponse[]>("/loja").then((response) => {
       setBanking(response.data);
+      console.log(response.data);
     });
   }, []);
 
   async function handlerSelectedBank(id: number) {
-    await AsyncStorage.setItem("@storage:idBank", id.toString());
+    setIdBank(id);
     navigate("Home");
     setShowTab(true);
+    removeAllFromCart();
   }
 
   return (

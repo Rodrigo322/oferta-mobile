@@ -18,6 +18,7 @@ interface CartContextData {
   cart: Cart;
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
+  removeAllFromCart: () => void;
 }
 
 export const CartContext = createContext<CartContextData>(
@@ -62,10 +63,15 @@ export function CartProvider({ children }: any) {
     }
   };
 
+  const removeAllFromCart = () => {
+    setCart({ products: [], productIds: [] });
+  };
+
   const contextData = {
     cart,
     addToCart,
     removeFromCart,
+    removeAllFromCart,
   };
 
   return (

@@ -87,7 +87,6 @@ export function AuthProvider({ children }: any) {
 
     await AsyncStorage.removeItem("@storage:token");
     await AsyncStorage.clear();
-    console.log("Token de saida " + token);
   }
 
   const authContextValue: AuthContextType = {
