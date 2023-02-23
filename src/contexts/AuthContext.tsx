@@ -10,7 +10,7 @@ interface Token {
 
 interface AuthContextType {
   token: Token | null;
-  login: (email: string, senha: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -53,11 +53,11 @@ export function AuthProvider({ children }: any) {
     loadStoredData();
   }, [token]);
 
-  async function login(email: string, senha: string) {
+  async function login(email: string, password: string) {
     try {
-      const response = await api.post("/login", {
+      const response = await api.post("/sign-in", {
         email,
-        senha,
+        password,
       });
 
       if (response.status !== 200) {
@@ -82,9 +82,7 @@ export function AuthProvider({ children }: any) {
 
   async function logout() {
     setToken(null);
-
     delete api.defaults.headers.common["Authorization"];
-
     await AsyncStorage.removeItem("@storage:token");
     await AsyncStorage.clear();
   }

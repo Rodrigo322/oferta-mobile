@@ -16,13 +16,13 @@ import { styles } from "./styles";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
   const { navigate } = useNavigation();
   const { login } = useAuth();
 
   function handleSignIn() {
     try {
-      login(email, senha);
+      login(email, password);
     } catch (error) {
       console.log(error);
       Alert.alert("Algo deu errado! Tente novamente!");
@@ -48,8 +48,8 @@ export function SignIn() {
           <TextInput
             placeholderTextColor="#fff"
             style={styles.input}
-            placeholder="Digite sua senha"
-            onChangeText={setSenha}
+            placeholder="Digite sua password"
+            onChangeText={setPassword}
           />
         </View>
 

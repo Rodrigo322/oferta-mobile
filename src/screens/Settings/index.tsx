@@ -28,7 +28,7 @@ export function Settings() {
   function handleSignOut() {
     logout();
     setShowTab(false);
-    setIdBank(0);
+    setIdBank("");
     removeAllFromCart();
   }
 

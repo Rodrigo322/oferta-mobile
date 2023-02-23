@@ -8,12 +8,14 @@ import {
   View,
 } from "react-native";
 
+import { Card, CardProps } from "../../components/CardProduct";
 import { Header } from "../../components/Header";
 import { Highlights } from "../../components/Highlights";
+
 import { api } from "../../services/api";
 
-import { Card, CardProps } from "../../components/CardProduct";
 import { useTabContext } from "../../contexts/TabContext";
+
 import { styles } from "./styles";
 
 export function Home() {
@@ -23,12 +25,14 @@ export function Home() {
   const { navigate } = useNavigation();
 
   useEffect(() => {
-    if (idBank === 0) {
+    if (idBank === "") {
       return;
     } else {
-      api.get<CardProps[]>(`produtos/${idBank}`).then((response) => {
-        setProducts(response.data);
-      });
+      api
+        .get<CardProps[]>(`/get-all-product/store/${idBank}`)
+        .then((response) => {
+          setProducts(response.data);
+        });
     }
   }, [idBank]);
 
@@ -57,10 +61,10 @@ export function Home() {
             {products.map((product) => (
               <Card
                 key={product.id}
-                img={product.img}
-                nome={product.nome}
+                image={product.image}
+                name={product.name}
                 id={product.id}
-                preco={product.preco}
+                price={product.price}
               />
             ))}
           </View>

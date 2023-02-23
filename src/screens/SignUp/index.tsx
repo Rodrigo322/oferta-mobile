@@ -21,20 +21,20 @@ import { styles } from "./styles";
 
 export function SignUp() {
   const { navigate } = useNavigation();
-  const [nome, setNome] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
   const [cpf, setCpf] = useState("");
-  const [isPassword, setPassword] = useState("");
+  const [isPassword, setIsPassword] = useState("");
 
   function handleCreateUser() {
     api
-      .post("user", {
-        nome,
+      .post("/user", {
+        name,
         email,
-        senha,
-        nivelAcessoNome: "Comprador",
+        password,
         cpf,
+        accessLevelName: "Comprador",
       })
       .then((response) => {
         if (response.status === 201) {
@@ -46,6 +46,13 @@ export function SignUp() {
             "Ocorreu um erro ao criar o usuário tente novamente"
           );
         }
+      })
+      .catch((Error) => {
+        console.log(Error);
+        Alert.alert(
+          "Error",
+          "Ocorreu um erro ao criar o usuário tente novamente"
+        );
       });
   }
 
@@ -58,8 +65,8 @@ export function SignUp() {
           <TextInput
             placeholderTextColor="#fff"
             style={styles.input}
-            placeholder="Digite seu nome"
-            onChangeText={setNome}
+            placeholder="Digite seu name"
+            onChangeText={setName}
           />
         </View>
 
@@ -85,29 +92,29 @@ export function SignUp() {
 
         <View style={styles.inputGroup}>
           <LockKey
-            color={senha !== isPassword ? "#d46b71" : "#fff"}
+            color={password !== isPassword ? "#d46b71" : "#fff"}
             size={32}
             weight="duotone"
           />
           <TextInput
             placeholderTextColor="#fff"
             style={styles.input}
-            placeholder="Digite uma senha"
-            onChangeText={setSenha}
+            placeholder="Digite uma password"
+            onChangeText={setPassword}
           />
         </View>
 
         <View style={styles.inputGroup}>
           <LockKey
-            color={senha !== isPassword ? "#d46b71" : "#fff"}
+            color={password !== isPassword ? "#d46b71" : "#fff"}
             size={32}
             weight="duotone"
           />
           <TextInput
             placeholderTextColor="#fff"
             style={styles.input}
-            placeholder="Confirme a senha"
-            onChangeText={setPassword}
+            placeholder="Confirme a password"
+            onChangeText={setIsPassword}
           />
         </View>
         <TouchableOpacity

@@ -8,7 +8,7 @@ export declare global {
       ResetPassword: undefined;
       DeactivateAccount: undefined;
       AddressProfile: undefined;
-      DetailsProduct: { id: number };
+      DetailsProduct: { id: string };
       BuyFinalized: undefined;
       Cart: undefined;
       SelectBank: undefined;

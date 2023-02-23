@@ -14,35 +14,29 @@ import { CartContext } from "../../contexts/CartContext";
 import { api } from "../../services/api";
 import { styles } from "./styles";
 
-interface vendaProps {
-  id: number;
-  quantidade: number;
+interface saleProps {
+  id: string;
+  quantity: number;
 }
 
 export function Cart() {
   const { navigate, goBack } = useNavigation();
   const { cart, removeFromCart } = useContext(CartContext);
 
-  let venda: vendaProps[] = [];
+  let sale: saleProps[] = [];
 
-  venda = cart.products.map((product) => {
+  sale = cart.products.map((product) => {
     return {
       id: product.id,
-      quantidade: product.quantity,
+      quantity: product.quantity,
     };
   });
 
-  const requestBody = {
-    produtos: JSON.stringify(venda),
-  };
-
-  console.log(cart.products);
-
-  async function handleVandaProdutos() {
+  async function handleSaleProducts() {
     api
-      .post("/venda", {
-        produtos: venda,
-        usuarioVendedorId: cart.products[0].userId,
+      .post("/create-sale", {
+        products: sale,
+        userSellerId: cart.products[0].userId,
       })
       .then((response) => {
         navigate("BuyFinalized");
@@ -79,7 +73,7 @@ export function Cart() {
           <View key={product.id} style={styles.cartProduct}>
             <Image
               style={styles.cartProductImage}
-              source={{ uri: product.img }}
+              source={{ uri: product.image }}
             />
             <View style={styles.cartProductTextInfo}>
               <Text style={styles.cartProductText}>{product.name}</Text>
@@ -103,11 +97,11 @@ export function Cart() {
           style={styles.cartFooterButton}
         >
           <PlusCircle color="#fff" size={32} weight="duotone" />
-          <Text style={styles.cartFooterButtonText}>Produtos</Text>
+          <Text style={styles.cartFooterButtonText}>products</Text>
         </TouchableOpacity>
         <WhatsappLogo color="#019972" size={60} weight="duotone" />
         <TouchableOpacity
-          onPress={handleVandaProdutos}
+          onPress={handleSaleProducts}
           style={styles.cartFooterButton}
         >
           <ShoppingBag color="#FFF" size={32} weight="duotone" />

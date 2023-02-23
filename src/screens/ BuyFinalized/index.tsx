@@ -1,41 +1,40 @@
 import { useNavigation } from "@react-navigation/native";
 import { WhatsappLogo } from "phosphor-react-native";
 import { useContext } from "react";
-import {
-  Linking,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { HeaderReturn } from "../../components/HeaderReturn";
+import { Linking, Text, TouchableOpacity, View } from "react-native";
+
 import { CartContext } from "../../contexts/CartContext";
+
+import { HeaderReturn } from "../../components/HeaderReturn";
+
+import { styles } from "./styles";
 
 export function BuyFinalized() {
   const { navigate } = useNavigation();
   const { cart, removeAllFromCart } = useContext(CartContext);
 
-  let produtos = [];
+  let products = [];
 
-  produtos = cart.products.map((product) => {
+  products = cart.products.map((product) => {
     return {
-      id: JSON.stringify(product.id),
-      nome: JSON.stringify(product.name),
-      preço: JSON.stringify(product.price),
-      quantidade: JSON.stringify(product.quantity),
+      nome: product.name,
+      proço: product.price,
+      quantidade: product.quantity,
+      valor_total: product.price * product.quantity,
     };
   });
 
   const requestBody = {
-    produtos: JSON.stringify(produtos),
+    products: JSON.stringify(products, null, 3),
   };
   function handleLinkToWhatsapp() {
     Linking.openURL(
       `whatsapp://send?text=Olá! Desejo comprar esses produtos!
-        ${requestBody.produtos}
+        ${requestBody.products}
       &phone=+5562998256593`
     );
     removeAllFromCart();
+    navigate("Home");
   }
   return (
     <View>
@@ -64,45 +63,3 @@ export function BuyFinalized() {
     </View>
   );
 }
-
-export const styles = StyleSheet.create({
-  container: {
-    padding: 40,
-  },
-  logoWhatsapp: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 18,
-    color: "#019972",
-    paddingBottom: 15,
-    paddingTop: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    fontWeight: "300",
-    fontSize: 18,
-    color: "#019972",
-    paddingBottom: 15,
-  },
-  footer: {
-    paddingHorizontal: 40,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  footerButton: {
-    backgroundColor: "#019972",
-    height: 60,
-    width: "100%",
-    borderRadius: 7,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  footerText: {
-    color: "#fff",
-    fontSize: 18,
-  },
-});

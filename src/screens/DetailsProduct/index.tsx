@@ -10,15 +10,15 @@ import { api } from "../../services/api";
 import { styles } from "./styles";
 
 interface RouteParams {
-  id: number;
+  id: string;
 }
 
 interface DetailsProductProps extends RouteParams {
-  nome: string;
-  img: string;
-  preco: number;
-  Loja: {
-    usuarioId: number;
+  name: string;
+  image: string;
+  price: number;
+  store: {
+    userId: string;
   };
 }
 
@@ -33,19 +33,21 @@ export function DetailsProduct() {
   const { navigate } = useNavigation();
 
   useEffect(() => {
-    api.get<DetailsProductProps>(`/produto/${id}`).then((response) => {
-      setProduct(response.data);
-    });
+    api
+      .get<DetailsProductProps>(`/get-unique-product/${id}`)
+      .then((response) => {
+        setProduct(response.data);
+      });
   }, [id]);
 
   const handleAddCartProduct = () => {
     addToCart({
       id,
-      img: product.img,
-      name: product.nome,
-      price: product.preco,
+      image: product.image,
+      name: product.name,
+      price: product.price,
       quantity: counterProduct,
-      userId: product.Loja.usuarioId,
+      userId: product.store.userId,
     });
     navigate("Cart");
   };
@@ -55,8 +57,8 @@ export function DetailsProduct() {
       <View style={styles.container}>
         <Image style={styles.image} source={LogoImg} />
         <View style={styles.product}>
-          <Image style={styles.productImage} source={{ uri: product.img }} />
-          <Text style={styles.productTitle}>{product.nome}</Text>
+          <Image style={styles.productImage} source={{ uri: product.image }} />
+          <Text style={styles.productTitle}>{product.name}</Text>
         </View>
         <View style={styles.cartProductButtons}>
           <TouchableOpacity
@@ -72,7 +74,7 @@ export function DetailsProduct() {
           </TouchableOpacity>
         </View>
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Valor: R$ {product.preco}</Text>
+          <Text style={styles.footerText}>Valor: R$ {product.price}</Text>
           <TouchableOpacity
             onPress={handleAddCartProduct}
             style={styles.footerButton}

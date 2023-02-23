@@ -27,7 +27,7 @@ export function TabRoutes() {
   const { showTab } = useTabContext();
   return (
     <Navigator
-      initialRouteName="Home"
+      initialRouteName="SelectBank"
       screenOptions={{
         headerStyle: {
           backgroundColor: "#019972",

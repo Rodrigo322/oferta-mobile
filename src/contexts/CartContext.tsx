@@ -1,23 +1,23 @@
 import React, { createContext, useState } from "react";
 
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   price: number;
-  img: string;
+  image: string;
   quantity: number;
-  userId: number;
+  userId: string;
 }
 
 interface Cart {
   products: Product[];
-  productIds: number[];
+  productIds: string[];
 }
 
 interface CartContextData {
   cart: Cart;
   addToCart: (product: Product) => void;
-  removeFromCart: (productId: number) => void;
+  removeFromCart: (productId: string) => void;
   removeAllFromCart: () => void;
 }
 
@@ -52,7 +52,7 @@ export function CartProvider({ children }: any) {
     }
   };
 
-  const removeFromCart = (productId: number) => {
+  const removeFromCart = (productId: string) => {
     const productIndex = cart.productIds.indexOf(productId);
     if (productIndex >= 0) {
       const newProducts = [...cart.products];

@@ -18,8 +18,8 @@ import { CartContext } from "../../contexts/CartContext";
 import { useTabContext } from "../../contexts/TabContext";
 
 interface BankingResponse {
-  id: number;
-  nome: string;
+  id: string;
+  name: string;
 }
 
 export function SelectBank() {
@@ -30,13 +30,12 @@ export function SelectBank() {
   const { navigate } = useNavigation();
 
   useEffect(() => {
-    api.get<BankingResponse[]>("/loja").then((response) => {
+    api.get<BankingResponse[]>("/stores").then((response) => {
       setBanking(response.data);
-      console.log(response.data);
     });
   }, []);
 
-  async function handlerSelectedBank(id: number) {
+  async function handlerSelectedBank(id: string) {
     setIdBank(id);
     navigate("Home");
     setShowTab(true);
@@ -54,7 +53,7 @@ export function SelectBank() {
             style={styles.cardBanking}
           >
             <Image style={styles.cardBankingImg} source={logoImg} />
-            <Text style={styles.cardBankingTitle}>{bank.nome}</Text>
+            <Text style={styles.cardBankingTitle}>{bank.name}</Text>
           </TouchableOpacity>
         ))}
       </View>

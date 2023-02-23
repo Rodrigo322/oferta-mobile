@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { HeaderReturn } from "../../components/HeaderReturn";
 import { api } from "../../services/api";
 import { styles } from "./styles";
 
 interface UserResponse {
-  nome: string;
+  name: string;
   email: string;
   cpf: string;
 }
@@ -14,12 +19,13 @@ interface UserResponse {
 export function Profile() {
   const [isUpdated, setIsUpdated] = useState(false);
   const [user, setUser] = useState<UserResponse>({} as UserResponse);
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [cpf, setCpf] = useState("");
+
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [cpf, setCpf] = useState(user.cpf);
 
   function handleGetUser() {
-    api.get<UserResponse>("/get/user").then((response) => {
+    api.get<UserResponse>("/unique-user").then((response) => {
       setUser(response.data);
     });
   }
@@ -31,7 +37,7 @@ export function Profile() {
   function handleUpdateUser() {
     api
       .post("/update/user", {
-        nome,
+        name,
         email,
         cpf,
       })
@@ -68,8 +74,8 @@ export function Profile() {
             <TextInput
               editable={isUpdated}
               style={styles.input}
-              value={isUpdated ? nome : user.nome}
-              onChangeText={setNome}
+              value={isUpdated ? name : user.name}
+              onChangeText={setName}
             />
           </View>
 
