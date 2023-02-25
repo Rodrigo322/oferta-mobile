@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Oferta",
+    "slug": "Oferta",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
