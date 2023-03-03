@@ -40,7 +40,6 @@ export function BuyFinalized() {
   return (
     <View>
       <HeaderReturn title="Início" />
-
       <View style={styles.container}>
         <View style={styles.logoWhatsapp}>
           <WhatsappLogo color="#019972" size={200} weight="duotone" />

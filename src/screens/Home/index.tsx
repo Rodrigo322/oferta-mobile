@@ -18,6 +18,7 @@ import { api } from "../../services/api";
 
 import { useTabContext } from "../../contexts/TabContext";
 
+import { checkInternetConnection } from "../../utils/netInfo";
 import { styles } from "./styles";
 
 export function Home() {
@@ -35,12 +36,18 @@ export function Home() {
       return navigate("SelectBank");
     } else {
       setProducts([]);
-      api
-        .get<CardProps[]>(`/get-all-product/store/${idBank}`)
-        .then((response) => {
-          setProducts(response.data);
-          setLoading(false);
-        });
+      checkInternetConnection().then((isConnected) => {
+        if (!isConnected) {
+          Alert.alert("Sem conexão", "Você está sem conexão com a internet.");
+          return;
+        }
+        api
+          .get<CardProps[]>(`/get-all-product/store/${idBank}`)
+          .then((response) => {
+            setProducts(response.data);
+            setLoading(false);
+          });
+      });
     }
   }, [idBank]);
 

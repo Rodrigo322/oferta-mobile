@@ -4,9 +4,13 @@ export const styles = StyleSheet.create({
   myRequestContainer: {
     padding: 40,
   },
+  loading: {
+    alignContent: "center",
+    marginTop: 50,
+  },
   RequestCard: {
     height: 100,
-    elevation: 15,
+    elevation: 5,
     borderRadius: 10,
     backgroundColor: "#DFEDE9",
     marginVertical: 10,

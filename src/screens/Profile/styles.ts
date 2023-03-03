@@ -2,8 +2,10 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    // marginTop: 20,
     padding: 40,
+  },
+  loading: {
+    marginTop: 50,
   },
   header: {
     paddingHorizontal: 40,

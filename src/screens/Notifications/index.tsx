@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
   },
   notificationCard: {
     height: 100,
-    elevation: 15,
+    elevation: 5,
     borderRadius: 10,
     backgroundColor: "#DFEDE9",
     marginVertical: 10,

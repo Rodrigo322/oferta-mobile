@@ -20,6 +20,7 @@ import { TextInputMask } from "react-native-masked-text";
 
 import LogoImg from "../../assets/Logo.png";
 import { api } from "../../services/api";
+import { checkInternetConnection } from "../../utils/netInfo";
 import { styles } from "./styles";
 
 export function SignUp() {
@@ -31,7 +32,12 @@ export function SignUp() {
   const [cpf, setCpf] = useState("");
   const [isPassword, setIsPassword] = useState("");
 
-  function handleCreateUser() {
+  async function handleCreateUser() {
+    const isConnected = await checkInternetConnection();
+    if (!isConnected) {
+      Alert.alert("Sem conexão", "Você está sem conexão com a internet.");
+      return;
+    }
     if (
       name === "" ||
       email === "" ||

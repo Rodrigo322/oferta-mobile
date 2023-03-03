@@ -3,6 +3,7 @@ import jwtDecode, { JwtPayload } from "jwt-decode";
 import { createContext, useContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { api } from "../services/api";
+import { checkInternetConnection } from "../utils/netInfo";
 
 interface Token {
   token?: string | null;
@@ -43,6 +44,11 @@ export function AuthProvider({ children }: any) {
 
   useEffect(() => {
     const loadStoredData = async () => {
+      const isConnected = await checkInternetConnection();
+      if (!isConnected) {
+        Alert.alert("Sem conexão", "Você está sem conexão com a internet.");
+        return;
+      }
       const storageToken = await AsyncStorage.getItem("@storage:token");
 
       if (isTokenValid(storageToken)) {
@@ -58,6 +64,11 @@ export function AuthProvider({ children }: any) {
 
   async function login(email: string, password: string) {
     try {
+      const isConnected = await checkInternetConnection();
+      if (!isConnected) {
+        Alert.alert("Sem conexão", "Você está sem conexão com a internet.");
+        return;
+      }
       setLoading(true);
       const response = await api.post("/sign-in", {
         email,

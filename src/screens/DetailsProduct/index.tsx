@@ -1,12 +1,13 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { MinusCircle, PlusCircle } from "phosphor-react-native";
 import { useContext, useEffect, useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
 
 import LogoImg from "../../assets/Logo.png";
 import { HeaderReturn } from "../../components/HeaderReturn";
 import { CartContext } from "../../contexts/CartContext";
 import { api } from "../../services/api";
+import { checkInternetConnection } from "../../utils/netInfo";
 import { styles } from "./styles";
 
 interface RouteParams {
@@ -33,11 +34,17 @@ export function DetailsProduct() {
   const { navigate } = useNavigation();
 
   useEffect(() => {
-    api
-      .get<DetailsProductProps>(`/get-unique-product/${id}`)
-      .then((response) => {
-        setProduct(response.data);
-      });
+    checkInternetConnection().then((isConnected) => {
+      if (!isConnected) {
+        Alert.alert("Sem conexão", "Você está sem conexão com a internet.");
+        return;
+      }
+      api
+        .get<DetailsProductProps>(`/get-unique-product/${id}`)
+        .then((response) => {
+          setProduct(response.data);
+        });
+    });
   }, [id]);
 
   const handleAddCartProduct = () => {

@@ -8,11 +8,19 @@ import {
   XCircle,
 } from "phosphor-react-native";
 import { useContext } from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { HeaderReturn } from "../../components/HeaderReturn";
 import { CartContext } from "../../contexts/CartContext";
 import { api } from "../../services/api";
+import { checkInternetConnection } from "../../utils/netInfo";
 import { styles } from "./styles";
 
 interface saleProps {
@@ -33,14 +41,20 @@ export function Cart() {
   });
 
   async function handleSaleProducts() {
-    api
-      .post("/create-sale", {
-        products: sale,
-        userSellerId: cart.products[0].userId,
-      })
-      .then((response) => {
-        navigate("BuyFinalized");
-      });
+    checkInternetConnection().then((isConnected) => {
+      if (!isConnected) {
+        Alert.alert("Sem conexão", "Você está sem conexão com a internet.");
+        return;
+      }
+      api
+        .post("/create-sale", {
+          products: sale,
+          userSellerId: cart.products[0].userId,
+        })
+        .then((response) => {
+          navigate("BuyFinalized");
+        });
+    });
   }
 
   return (
