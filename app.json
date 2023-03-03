@@ -1,10 +1,45 @@
 {
+  "name": "Oferta",
+  "displayName": "Oferta",
   "expo": {
     "name": "Oferta",
     "slug": "Oferta",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "orientation": "portrait",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#019972"
+    },
+    "icon": "./assets/icon.png",
+    "assetBundlePatterns": ["**/*"],
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "expo.ts",
+        "expo.tsx",
+        "expo.js",
+        "expo.jsx",
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "wasm",
+        "svg"
+      ]
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ec1c7df0-45b5-4e2f-b635-0494d31e91d8"
+      }
+    },
+    "android": {
+      "package": "com.oferta",
+      "versionCode": 1
+    },
+    "ios": {
+      "bundleIdentifier": "com.oferta"
+    }
   }
 }
