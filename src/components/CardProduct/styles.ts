@@ -4,20 +4,21 @@ const { width } = Dimensions.get("window");
 export const styles = StyleSheet.create({
   cardContainer: {
     borderRadius: 10,
-    marginHorizontal: 2,
-    marginBottom: 5,
+    marginHorizontal: 5,
+    marginBottom: 15,
     padding: 15,
-    height: 200,
+    height: 160,
     backgroundColor: "#DFEDE9",
-    width: width / 2 - 20,
+    width: width / 3 - 20,
+    elevation: 5,
   },
   cardImageView: {
-    height: 100,
+    height: 80,
     alignItems: "center",
   },
   cardImage: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
   },
   cardTitleText: {
     fontWeight: "bold",
@@ -34,8 +35,8 @@ export const styles = StyleSheet.create({
   },
   cardInfoText: {
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: 13,
     textTransform: "capitalize",
-    color: "#343F4B",
+    color: "#019972",
   },
 });

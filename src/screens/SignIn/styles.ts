@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     color: "#fff",
   },
   inputGroup: {
+    elevation: 2,
     flexDirection: "row",
     paddingHorizontal: 10,
     backgroundColor: "#53bda2",
@@ -43,6 +44,7 @@ export const styles = StyleSheet.create({
     borderRadius: 7,
     justifyContent: "center",
     alignItems: "center",
+    elevation: 2,
   },
   buttonSignInText: {
     fontSize: 18,

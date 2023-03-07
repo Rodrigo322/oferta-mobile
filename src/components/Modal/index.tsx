@@ -10,7 +10,14 @@ export function ModalApp({
   backgroundColor,
 }) {
   return (
-    <Modal animationType="slide" transparent visible={isVisible}>
+    <Modal
+      animationType="slide"
+      transparent
+      style={{
+        backgroundColor: "rgba(255, 255, 255, 0.2)",
+      }}
+      visible={isVisible}
+    >
       <View
         style={[
           styles.modalContent,

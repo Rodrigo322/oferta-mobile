@@ -32,6 +32,7 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
     borderRadius: 7,
     alignItems: "center",
+    elevation: 2,
   },
   buttonSignIn: {
     height: 60,
@@ -39,6 +40,7 @@ export const styles = StyleSheet.create({
     borderRadius: 7,
     justifyContent: "center",
     alignItems: "center",
+    elevation: 2,
   },
   buttonSignInText: {
     fontSize: 18,

@@ -12,7 +12,10 @@ export const styles = StyleSheet.create({
   },
   titleContainer: {
     height: 60,
+    elevation: 3,
     backgroundColor: "#019972",
+    borderTopRightRadius: 18,
+    borderTopLeftRadius: 18,
     paddingHorizontal: 20,
     flexDirection: "row",
     alignItems: "center",

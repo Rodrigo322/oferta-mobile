@@ -97,6 +97,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#019972",
     alignItems: "center",
     justifyContent: "center",
+    elevation: 5,
   },
   cartFooterButtonText: {
     color: "#FFf",

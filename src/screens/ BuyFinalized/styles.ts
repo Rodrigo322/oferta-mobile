@@ -35,6 +35,7 @@ export const styles = StyleSheet.create({
     borderRadius: 7,
     alignItems: "center",
     justifyContent: "center",
+    elevation: 5,
   },
   footerText: {
     color: "#fff",

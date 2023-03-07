@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import { PlusCircle } from "phosphor-react-native";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 import { styles } from "./styles";
@@ -24,7 +23,7 @@ export function Card({ id, name, price, image }: CardProps) {
       <Text style={styles.cardTitleText}>{name}</Text>
       <View style={styles.cardInfoContainer}>
         <Text style={styles.cardInfoText}>R$ {price}Kg</Text>
-        <PlusCircle color="#343F4B" size={30} weight="fill" />
+        {/* <PlusCircle color="#343F4B" size={30} weight="fill" /> */}
       </View>
     </TouchableOpacity>
   );

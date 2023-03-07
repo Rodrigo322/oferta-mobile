@@ -7,6 +7,7 @@ import {
   ShoppingCart,
   UserGear,
 } from "phosphor-react-native";
+
 import { useTabContext } from "../contexts/TabContext";
 import { BuyFinalized } from "../screens/ BuyFinalized";
 import { AddressProfile } from "../screens/AddressProfile";
@@ -35,9 +36,7 @@ export function TabRoutes() {
         },
         tabBarStyle: {
           backgroundColor: "#019972",
-          height: 60,
-          alignItems: "center",
-          justifyContent: "center",
+          height: 70,
         },
         headerTintColor: "#019972",
         headerShown: false,

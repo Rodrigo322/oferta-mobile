@@ -68,7 +68,7 @@ export function Profile() {
 
   function handleUpdateUser() {
     api
-      .post("/update/user", {
+      .put("/update-user", {
         name,
         email,
         cpf,

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { XCircle } from "phosphor-react-native";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   BackHandler,
   StyleSheet,
@@ -9,9 +9,11 @@ import {
   View,
 } from "react-native";
 import { HeaderReturn } from "../../components/HeaderReturn";
+import { ModalApp } from "../../components/Modal";
 
 export function DeactivateAccount() {
   const { navigate } = useNavigation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   function handleBackPress() {
     navigate("Settings");
@@ -43,10 +45,56 @@ export function DeactivateAccount() {
         </Text>
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerButton}>
+        <TouchableOpacity
+          onPress={() => setIsModalVisible(true)}
+          style={styles.footerButton}
+        >
           <Text style={styles.footerText}>Desativar Conta</Text>
         </TouchableOpacity>
       </View>
+
+      <ModalApp
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        title="Confirma o desativamento da conta?"
+        backgroundColor="#DFEDE9"
+      >
+        <View
+          style={{
+            height: 200,
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 25,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              width: "40%",
+              height: 45,
+              backgroundColor: "#d46b71",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 16,
+              elevation: 5,
+            }}
+          >
+            <Text style={{ color: "#FFF" }}>Sim</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              width: "40%",
+              height: 45,
+              backgroundColor: "#019972",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 16,
+              elevation: 5,
+            }}
+          >
+            <Text style={{ color: "#FFF" }}>Não</Text>
+          </TouchableOpacity>
+        </View>
+      </ModalApp>
     </View>
   );
 }
@@ -84,6 +132,7 @@ export const styles = StyleSheet.create({
     borderRadius: 7,
     alignItems: "center",
     justifyContent: "center",
+    elevation: 5,
   },
   footerText: {
     color: "#fff",

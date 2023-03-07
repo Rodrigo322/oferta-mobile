@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
     borderRadius: 7,
     justifyContent: "center",
     alignItems: "center",
+    elevation: 5,
   },
   buttonText: {
     fontSize: 18,

@@ -100,9 +100,14 @@ export function Cart() {
           style={styles.cartFooterButton}
         >
           <PlusCircle color="#fff" size={32} weight="duotone" />
-          <Text style={styles.cartFooterButtonText}>products</Text>
+          <Text style={styles.cartFooterButtonText}>Produtos</Text>
         </TouchableOpacity>
-        <WhatsappLogo color="#019972" size={60} weight="duotone" />
+        <WhatsappLogo
+          style={{ elevation: 5 }}
+          color="#019972"
+          size={60}
+          weight="duotone"
+        />
         <TouchableOpacity
           disabled={cart.products.length === 0 ? true : false}
           onPress={handleBuy}

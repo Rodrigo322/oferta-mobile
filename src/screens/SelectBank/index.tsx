@@ -86,6 +86,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-around",
     backgroundColor: "#DFEDE9",
     width: width / 2 - 20,
+    elevation: 5,
   },
   cardBankingImg: {
     width: 100,

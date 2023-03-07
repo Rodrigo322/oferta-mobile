@@ -37,6 +37,7 @@ export function AddressProfile() {
   const [state, setState] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isLoadingUpdated, setIsLoadingUpdated] = useState(false);
 
   const [isCreate, setIsCreate] = useState(false);
 
@@ -67,7 +68,27 @@ export function AddressProfile() {
     setLoading(false);
   }
 
-  async function handleUpdateAddress(id: string) {}
+  async function handleUpdateAddress(addressId: string) {
+    setIsLoadingUpdated(true);
+    console.log("id do endereço ", addressId);
+    api
+      .put(`/update-address/${addressId}`, {
+        street,
+        CEP,
+        neighborhood,
+        state,
+        city,
+      })
+      .then((response) => {
+        console.log(response);
+        loadingAddress();
+        setIsCreate(false);
+        setIsLoadingUpdated(false);
+      })
+      .finally(() => {
+        setIsLoadingUpdated(false);
+      });
+  }
 
   function handleUpdateAddressAddTextInput({
     id,
@@ -256,11 +277,16 @@ export function AddressProfile() {
                   }
                   style={styles.button}
                 >
-                  <Text style={styles.buttonText}>
-                    {addressProfile.length === 0
-                      ? "Criar novo endereço"
-                      : "Atualizar meu endereço"}
-                  </Text>
+                  {isLoadingUpdated && (
+                    <ActivityIndicator size="large" color="#FFF" />
+                  )}
+                  {!isLoadingUpdated && (
+                    <Text style={styles.buttonText}>
+                      {addressProfile.length === 0
+                        ? "Criar novo endereço"
+                        : "Atualizar meu endereço"}
+                    </Text>
+                  )}
                 </TouchableOpacity>
               </View>
             </>
