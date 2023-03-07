@@ -113,13 +113,13 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.ofairta"
+    namespace 'com.rodrigo322.OFairTa'
     defaultConfig {
-        applicationId "com.ofairta"
+        applicationId 'com.rodrigo322.OFairTa'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
 
     splits {
