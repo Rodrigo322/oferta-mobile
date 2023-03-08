@@ -15,6 +15,7 @@ export declare global {
       Home?: undefined;
       Settings: undefined;
       DetailsSales: { id: string };
+      ProduceHistory: undefined;
     }
   }
 }

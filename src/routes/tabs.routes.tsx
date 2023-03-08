@@ -18,6 +18,7 @@ import { DetailsProduct } from "../screens/DetailsProduct";
 import { Home } from "../screens/Home";
 import { MyRequests } from "../screens/MyRequests";
 import { Notifications } from "../screens/Notifications";
+import { ProducerHistory } from "../screens/ProducerHistory";
 import { Profile } from "../screens/Profile";
 import { ResetPassword } from "../screens/ResetPassword";
 import { SelectBank } from "../screens/SelectBank";
@@ -143,6 +144,12 @@ export function TabRoutes() {
       <Screen
         name="DetailsSales"
         component={DetailsSales}
+        options={{ tabBarButton: () => null }}
+      />
+
+      <Screen
+        name="ProduceHistory"
+        component={ProducerHistory}
         options={{ tabBarButton: () => null }}
       />
     </Navigator>

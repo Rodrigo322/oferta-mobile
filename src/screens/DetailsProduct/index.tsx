@@ -87,7 +87,9 @@ export function DetailsProduct() {
         <>
           {product && (
             <View style={styles.container}>
-              <Image style={styles.image} source={LogoImg} />
+              <TouchableOpacity onPress={() => navigate("ProduceHistory")}>
+                <Image style={styles.image} source={LogoImg} />
+              </TouchableOpacity>
               <View style={styles.product}>
                 <Image
                   style={styles.productImage}
