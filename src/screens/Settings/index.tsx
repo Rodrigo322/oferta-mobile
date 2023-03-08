@@ -15,7 +15,13 @@ import {
   XSquare,
 } from "phosphor-react-native";
 import { useContext, useEffect, useState } from "react";
-import { Pressable, Text, TouchableOpacity, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { HeaderReturn } from "../../components/HeaderReturn";
 import { ModalApp } from "../../components/Modal";
@@ -57,98 +63,107 @@ export function Settings() {
     <View style={styles.container}>
       <HeaderReturn title="Configurações" />
       <Text style={styles.settingUserName}>Olá, {userName}</Text>
-      <View style={styles.settingsContainerOptions}>
-        <Text style={styles.settingOptionTitle}>Minha Conta</Text>
-
-        <TouchableOpacity
-          style={[
-            styles.settingContainerOptionsGroup,
-            styles.settingContainerOptionsGroupFirst,
-          ]}
-          onPress={() => navigate("AddressProfile")}
-        >
-          <View style={styles.settingContainerOptionsIcon}>
-            <MapPin color="#019972" size={32} weight="thin" />
-            <Text style={styles.settingOptionsText}>Endereço de entrega</Text>
+      <ScrollView style={{ height: "90%", marginBottom: 200 }}>
+        <View style={styles.settingsContainerOptions}>
+          <Text style={styles.settingOptionTitle}>Minha Conta</Text>
+          <View style={{ alignItems: "center", gap: 10 }}>
+            <TouchableOpacity
+              style={[
+                styles.settingContainerOptionsGroup,
+                styles.settingContainerOptionsGroupFirst,
+              ]}
+              onPress={() => navigate("AddressProfile")}
+            >
+              <View style={styles.settingContainerOptionsIcon}>
+                <MapPin color="#019972" size={32} weight="thin" />
+                <Text style={styles.settingOptionsText}>
+                  Endereço de entrega
+                </Text>
+              </View>
+              <CaretRight color="#019972" size={32} weight="thin" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigate("Profile")}
+              style={styles.settingContainerOptionsGroup}
+            >
+              <View style={styles.settingContainerOptionsIcon}>
+                <IdentificationBadge color="#019972" size={32} weight="thin" />
+                <Text style={styles.settingOptionsText}>Dados pessoais</Text>
+              </View>
+              <CaretRight color="#019972" size={32} weight="thin" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigate("ResetPassword")}
+              style={styles.settingContainerOptionsGroup}
+            >
+              <View style={styles.settingContainerOptionsIcon}>
+                <LockKey color="#019972" size={32} weight="thin" />
+                <Text style={styles.settingOptionsText}>Alterar senha</Text>
+              </View>
+              <CaretRight color="#019972" size={32} weight="thin" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigate("DeactivateAccount")}
+              style={styles.settingContainerOptionsGroup}
+            >
+              <View style={styles.settingContainerOptionsIcon}>
+                <XSquare color="#019972" size={32} weight="thin" />
+                <Text style={styles.settingOptionsText}>Desativar conta</Text>
+              </View>
+              <CaretRight color="#019972" size={32} weight="thin" />
+            </TouchableOpacity>
           </View>
-          <CaretRight color="#019972" size={32} weight="thin" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigate("Profile")}
-          style={styles.settingContainerOptionsGroup}
-        >
-          <View style={styles.settingContainerOptionsIcon}>
-            <IdentificationBadge color="#019972" size={32} weight="thin" />
-            <Text style={styles.settingOptionsText}>Dados pessoais</Text>
-          </View>
-          <CaretRight color="#019972" size={32} weight="thin" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigate("ResetPassword")}
-          style={styles.settingContainerOptionsGroup}
-        >
-          <View style={styles.settingContainerOptionsIcon}>
-            <LockKey color="#019972" size={32} weight="thin" />
-            <Text style={styles.settingOptionsText}>Alterar senha</Text>
-          </View>
-          <CaretRight color="#019972" size={32} weight="thin" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigate("DeactivateAccount")}
-          style={styles.settingContainerOptionsGroup}
-        >
-          <View style={styles.settingContainerOptionsIcon}>
-            <XSquare color="#019972" size={32} weight="thin" />
-            <Text style={styles.settingOptionsText}>Desativar conta</Text>
-          </View>
-          <CaretRight color="#019972" size={32} weight="thin" />
-        </TouchableOpacity>
-      </View>
-      <Text
-        style={[styles.settingOptionTitle, styles.settingOptionTitleSecond]}
-      >
-        Geral
-      </Text>
-      <Pressable
-        onPress={() => setIsModalVisible(true)}
-        style={[
-          styles.settingContainerOptionsGroup,
-          styles.settingContainerOptionsGroupFirst,
-        ]}
-      >
-        <View style={styles.settingContainerOptionsIcon}>
-          <Article color="#019972" size={32} weight="thin" />
-          <Text style={styles.settingOptionsText}>Sobre o OFairTa</Text>
         </View>
-        <CaretRight color="#019972" size={32} weight="thin" />
-      </Pressable>
-
-      <TouchableOpacity
-        onPress={() => setIsModalHelpVisible(!isModalHelpVisible)}
-        style={styles.settingContainerOptionsGroup}
-      >
-        <View style={styles.settingContainerOptionsIcon}>
-          <Question color="#019972" size={32} weight="thin" />
-          <Text style={styles.settingOptionsText}>Preciso de ajuda?</Text>
-        </View>
-        <CaretRight color="#019972" size={32} weight="thin" />
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        onPress={() => setIsModalSignOutVisible(!isModalSignOutVisible)}
-        style={styles.settingContainerOptionsGroup}
-      >
-        <View style={styles.settingContainerOptionsIcon}>
-          <Door color="#d46b71" size={32} weight="thin" />
-          <Text
-            style={[styles.settingOptionsText, styles.settingOptionsTextEnd]}
+        <Text
+          style={[styles.settingOptionTitle, styles.settingOptionTitleSecond]}
+        >
+          Geral
+        </Text>
+        <View style={{ alignItems: "center", gap: 10, paddingBottom: 200 }}>
+          <Pressable
+            onPress={() => setIsModalVisible(true)}
+            style={[
+              styles.settingContainerOptionsGroup,
+              styles.settingContainerOptionsGroupFirst,
+            ]}
           >
-            Sair
-          </Text>
-        </View>
-        <SignOut color="#d46b71" size={32} weight="thin" />
-      </TouchableOpacity>
+            <View style={styles.settingContainerOptionsIcon}>
+              <Article color="#019972" size={32} weight="thin" />
+              <Text style={styles.settingOptionsText}>Sobre o OFairTa</Text>
+            </View>
+            <CaretRight color="#019972" size={32} weight="thin" />
+          </Pressable>
 
+          <TouchableOpacity
+            onPress={() => setIsModalHelpVisible(!isModalHelpVisible)}
+            style={styles.settingContainerOptionsGroup}
+          >
+            <View style={styles.settingContainerOptionsIcon}>
+              <Question color="#019972" size={32} weight="thin" />
+              <Text style={styles.settingOptionsText}>Preciso de ajuda?</Text>
+            </View>
+            <CaretRight color="#019972" size={32} weight="thin" />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setIsModalSignOutVisible(!isModalSignOutVisible)}
+            style={styles.settingContainerOptionsGroup}
+          >
+            <View style={styles.settingContainerOptionsIcon}>
+              <Door color="#d46b71" size={32} weight="thin" />
+              <Text
+                style={[
+                  styles.settingOptionsText,
+                  styles.settingOptionsTextEnd,
+                ]}
+              >
+                Sair
+              </Text>
+            </View>
+            <SignOut color="#d46b71" size={32} weight="thin" />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
       <ModalApp
         title="Sobre o OFairtTa"
         isVisible={isModalVisible}

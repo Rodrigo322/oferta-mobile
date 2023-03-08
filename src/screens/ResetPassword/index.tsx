@@ -26,6 +26,7 @@ export function ResetPassword() {
     );
     return () => backButtonHandler.remove();
   }, []);
+
   return (
     <View>
       <HeaderReturn title="Alterar senha" />

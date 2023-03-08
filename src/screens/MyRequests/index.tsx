@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Alert,
   Image,
+  Pressable,
   ScrollView,
   Text,
   View,
@@ -10,6 +11,7 @@ import {
 import { HeaderReturn } from "../../components/HeaderReturn";
 import { api } from "../../services/api";
 
+import { useNavigation } from "@react-navigation/native";
 import LogoImg from "../../assets/ofairta.png";
 import { styles } from "./styles";
 
@@ -24,6 +26,7 @@ interface RequestResponseProps {
 export function MyRequests() {
   const [request, setRequest] = useState<RequestResponseProps[]>([]);
   const [loading, setLoading] = useState(false);
+  const { navigate } = useNavigation();
 
   useEffect(() => {
     setLoading(true);
@@ -53,7 +56,11 @@ export function MyRequests() {
       {!loading && (
         <ScrollView>
           {request.map((req) => (
-            <View key={req.id} style={styles.RequestCard}>
+            <Pressable
+              onPress={() => navigate("DetailsSales", { id: req.id })}
+              key={req.id}
+              style={styles.RequestCard}
+            >
               <Image source={LogoImg} style={styles.RequestImage} />
               <View style={styles.RequestContent}>
                 <Text style={styles.RequestTitle}>
@@ -63,7 +70,7 @@ export function MyRequests() {
               <Text style={styles.RequestAbout}>
                 R$ {req.total_value.toFixed(2)}
               </Text>
-            </View>
+            </Pressable>
           ))}
         </ScrollView>
       )}

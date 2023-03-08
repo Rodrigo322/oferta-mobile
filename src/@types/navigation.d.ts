@@ -11,9 +11,10 @@ export declare global {
       DetailsProduct: { id: string };
       BuyFinalized: undefined;
       Cart: undefined;
-      SelectBank: undefined;
-      Home: undefined;
+      SelectBank?: undefined;
+      Home?: undefined;
       Settings: undefined;
+      DetailsSales: { id: string };
     }
   }
 }

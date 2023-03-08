@@ -25,12 +25,15 @@ export const styles = StyleSheet.create({
   },
   settingContainerOptionsGroup: {
     borderColor: "#019972",
-    borderBottomWidth: 1,
+    borderWidth: 1,
+    borderRadius: 16,
+    elevation: 5,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     padding: 15,
     backgroundColor: "#DFEDE9",
+    width: "95%",
   },
   settingContainerOptionsIcon: {
     flexDirection: "row",

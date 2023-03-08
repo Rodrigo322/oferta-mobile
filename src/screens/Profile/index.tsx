@@ -28,12 +28,12 @@ export function Profile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
-  const { navigate } = useNavigation();
+  const { goBack } = useNavigation();
   const [loading, setLoading] = useState(false);
 
   function handleBackPress() {
     setIsUpdated(false);
-    navigate("Settings");
+    goBack();
     return true;
   }
 
@@ -74,7 +74,7 @@ export function Profile() {
         cpf,
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setIsUpdated(false);
         handleGetUser();
       });

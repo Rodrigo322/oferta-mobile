@@ -18,6 +18,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: "row",
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#019972",
   },
   RequestImage: {
     height: 80,

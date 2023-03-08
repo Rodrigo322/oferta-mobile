@@ -70,26 +70,28 @@ export function Cart() {
           </View>
         ) : (
           cart.products.map((product) => (
-            <View key={product.id} style={styles.cartProduct}>
-              <Image
-                style={styles.cartProductImage}
-                source={{ uri: product.image }}
-              />
-              <View style={styles.cartProductTextInfo}>
-                <Text style={styles.cartProductText}>{product.name}</Text>
-                <Text style={styles.cartProductText}>
-                  R$ {product.price * product.quantity}
-                </Text>
-              </View>
+            <View key={product.id} style={{ alignItems: "center" }}>
+              <View style={styles.cartProduct}>
+                <Image
+                  style={styles.cartProductImage}
+                  source={{ uri: product.image }}
+                />
+                <View style={styles.cartProductTextInfo}>
+                  <Text style={styles.cartProductText}>{product.name}</Text>
+                  <Text style={styles.cartProductText}>
+                    R$ {product.price * product.quantity}
+                  </Text>
+                </View>
 
-              <View style={styles.cartProductButtons}>
-                <Text style={styles.cartProductButtonsText}>
-                  Quantidade {product.quantity}
-                </Text>
+                <View style={styles.cartProductButtons}>
+                  <Text style={styles.cartProductButtonsText}>
+                    Quantidade {product.quantity}
+                  </Text>
+                </View>
+                <TouchableOpacity onPress={() => removeFromCart(product.id)}>
+                  <XCircle color="#d46b71" size={32} weight="fill" />
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity onPress={() => removeFromCart(product.id)}>
-                <XCircle color="#d46b71" size={32} weight="fill" />
-              </TouchableOpacity>
             </View>
           ))
         )}
