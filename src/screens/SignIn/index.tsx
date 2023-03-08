@@ -1,10 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
-import { Envelope, LockKey } from "phosphor-react-native";
+import { Envelope, Eye, EyeClosed, LockKey } from "phosphor-react-native";
 import { useState } from "react";
 import {
   ActivityIndicator,
   Alert,
   Image,
+  Pressable,
   ScrollView,
   Text,
   TextInput,
@@ -19,6 +20,7 @@ import { styles } from "./styles";
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPassword, setIsPassword] = useState(true);
   const { navigate } = useNavigation();
   const { login, loading } = useAuth();
 
@@ -59,11 +61,18 @@ export function SignIn() {
           <View style={styles.inputGroup}>
             <LockKey color="#fff" size={32} weight="duotone" />
             <TextInput
+              secureTextEntry={isPassword}
               placeholderTextColor="#fff"
               style={styles.input}
               placeholder="Digite sua password"
               onChangeText={setPassword}
             />
+            <Pressable onPress={() => setIsPassword(!isPassword)}>
+              {isPassword && (
+                <EyeClosed color="#fff" size={32} weight="duotone" />
+              )}
+              {!isPassword && <Eye color="#fff" size={32} weight="duotone" />}
+            </Pressable>
           </View>
 
           <TouchableOpacity

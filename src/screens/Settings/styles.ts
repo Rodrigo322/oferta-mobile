@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   container: {},
   settingUserName: {
     paddingTop: 15,
+    paddingBottom: 15,
     paddingHorizontal: 15,
     fontSize: 18,
     color: "#019972",
@@ -15,10 +16,9 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     color: "#019972",
     paddingBottom: 15,
-    paddingTop: 20,
   },
   settingOptionTitleSecond: {
-    paddingTop: 60,
+    paddingTop: 20,
   },
   settingContainerOptionsGroupFirst: {
     borderTopWidth: 1,

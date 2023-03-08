@@ -87,8 +87,23 @@ export function DetailsProduct() {
         <>
           {product && (
             <View style={styles.container}>
-              <TouchableOpacity onPress={() => navigate("ProduceHistory")}>
+              <TouchableOpacity
+                style={{
+                  marginBottom: 30,
+                  alignItems: "center",
+                  gap: 2,
+                }}
+                onPress={() => navigate("ProduceHistory")}
+              >
                 <Image style={styles.image} source={LogoImg} />
+                <Text
+                  style={{
+                    color: "#019972",
+                    fontWeight: "400",
+                  }}
+                >
+                  Clique para ver mais detalhes do produtor
+                </Text>
               </TouchableOpacity>
               <View style={styles.product}>
                 <Image

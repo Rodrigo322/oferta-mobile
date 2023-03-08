@@ -63,7 +63,10 @@ export function Settings() {
     <View style={styles.container}>
       <HeaderReturn title="Configurações" />
       <Text style={styles.settingUserName}>Olá, {userName}</Text>
-      <ScrollView style={{ height: "90%", marginBottom: 200 }}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ height: "90%", marginBottom: 200 }}
+      >
         <View style={styles.settingsContainerOptions}>
           <Text style={styles.settingOptionTitle}>Minha Conta</Text>
           <View style={{ alignItems: "center", gap: 10 }}>

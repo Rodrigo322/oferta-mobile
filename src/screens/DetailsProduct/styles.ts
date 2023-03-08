@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 10,
-    marginBottom: 30,
   },
   product: {
     borderWidth: 1,

@@ -1,6 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import {
   Envelope,
+  Eye,
+  EyeClosed,
   IdentificationBadge,
   IdentificationCard,
   LockKey,
@@ -10,6 +12,7 @@ import {
   ActivityIndicator,
   Alert,
   Image,
+  Pressable,
   ScrollView,
   Text,
   TextInput,
@@ -19,6 +22,7 @@ import {
 import { TextInputMask } from "react-native-masked-text";
 
 import LogoImg from "../../assets/ofairta.png";
+import { ModalApp } from "../../components/Modal";
 import { api } from "../../services/api";
 import { checkInternetConnection } from "../../utils/netInfo";
 import { styles } from "./styles";
@@ -31,6 +35,8 @@ export function SignUp() {
   const [password, setPassword] = useState("");
   const [cpf, setCpf] = useState("");
   const [isPassword, setIsPassword] = useState("");
+  const [isEmptyPassword, setIsEmptyPassword] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   async function handleCreateUser() {
     const isConnected = await checkInternetConnection();
@@ -45,7 +51,7 @@ export function SignUp() {
       cpf === "" ||
       isPassword === ""
     ) {
-      return Alert.alert("Atenção", "Preencha corretamente todos os campos.");
+      return setShowModal(true);
     } else if (password !== isPassword) {
       return Alert.alert("Atenção", "As senhas não estão iguais.");
     } else {
@@ -129,11 +135,21 @@ export function SignUp() {
               weight="duotone"
             />
             <TextInput
+              secureTextEntry={isEmptyPassword}
               placeholderTextColor="#fff"
               style={styles.input}
               placeholder="Digite uma senha"
               onChangeText={setPassword}
             />
+
+            <Pressable onPress={() => setIsEmptyPassword(!isEmptyPassword)}>
+              {isEmptyPassword && (
+                <EyeClosed color="#fff" size={32} weight="duotone" />
+              )}
+              {!isEmptyPassword && (
+                <Eye color="#fff" size={32} weight="duotone" />
+              )}
+            </Pressable>
           </View>
 
           <View style={styles.inputGroup}>
@@ -143,11 +159,21 @@ export function SignUp() {
               weight="duotone"
             />
             <TextInput
+              secureTextEntry={isEmptyPassword}
               placeholderTextColor="#fff"
               style={styles.input}
               placeholder="Confirme a senha"
               onChangeText={setIsPassword}
             />
+
+            <Pressable onPress={() => setIsEmptyPassword(!isEmptyPassword)}>
+              {isEmptyPassword && (
+                <EyeClosed color="#fff" size={32} weight="duotone" />
+              )}
+              {!isEmptyPassword && (
+                <Eye color="#fff" size={32} weight="duotone" />
+              )}
+            </Pressable>
           </View>
           <TouchableOpacity
             disabled={loading}
@@ -169,6 +195,23 @@ export function SignUp() {
           <Text style={styles.signMessageTextBold}>Faça Login</Text>
         </TouchableOpacity>
       </View>
+
+      <ModalApp
+        onClose={() => setShowModal(!showModal)}
+        title="Anteção"
+        backgroundColor="#FFF"
+        isVisible={showModal}
+      >
+        <Text
+          style={{
+            color: "#019972",
+            fontSize: 20,
+            padding: 40,
+          }}
+        >
+          Anteção Preencha corretamente todos os campos!
+        </Text>
+      </ModalApp>
     </ScrollView>
   );
 }

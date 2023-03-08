@@ -7,12 +7,12 @@ export function ProducerHistory() {
   return (
     <View>
       <HeaderReturn title="Historia do Produtor" />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
             backgroundColor: "#3eb091",
             width: "100%",
-            height: 300,
+            height: 250,
             alignItems: "center",
             justifyContent: "center",
             gap: 8,
@@ -25,6 +25,7 @@ export function ProducerHistory() {
               height: 150,
               borderWidth: 1,
               borderColor: "#FFF",
+              top: -10,
             }}
             source={{
               uri: "https://github.com/Rodrigo322.png",
@@ -35,6 +36,7 @@ export function ProducerHistory() {
               color: "#FFF",
               fontWeight: "700",
               fontSize: 18,
+              top: -10,
             }}
           >
             Rodrigo Lucas
@@ -44,7 +46,6 @@ export function ProducerHistory() {
         <View
           style={{
             width: "90%",
-            // height: 200,
             backgroundColor: "#DFEDE9",
             alignSelf: "center",
             top: -25,
@@ -52,7 +53,7 @@ export function ProducerHistory() {
             elevation: 5,
             padding: 10,
             alignItems: "center",
-            gap: 20,
+            gap: 5,
             marginBottom: 150,
           }}
         >
@@ -72,6 +73,7 @@ export function ProducerHistory() {
               fontWeight: "500",
               fontSize: 16,
               padding: 20,
+              lineHeight: 25,
               textAlign: "justify",
             }}
           >
@@ -83,7 +85,16 @@ export function ProducerHistory() {
             remaining essentially unchanged. It was popularised in the 1960s
             with the release of Letraset sheets containing Lorem Ipsum passages,
             and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply
+            dummy text of the printing and typesetting industry. Lorem Ipsum has
+            been the industry's standard dummy text ever since the 1500s, when
+            an unknown printer took a galley of type and scrambled it to make a
+            type specimen book. It has survived not only five centuries, but
+            also the leap into electronic typesetting, remaining essentially
+            unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently
+            with desktop publishing software like Aldus PageMaker including
+            versions of Lorem Ipsum.
           </Text>
         </View>
       </ScrollView>

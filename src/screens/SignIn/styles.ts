@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     padding: 40,
   },
   input: {
-    width: "100%",
+    width: "75%",
     height: 60,
     paddingLeft: 10,
     color: "#fff",
